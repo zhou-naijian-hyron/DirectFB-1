@@ -1,1 +1,1 @@
-../common_files/prepare.sh
+android update project --path . --target android-10
