@@ -487,7 +487,9 @@ dfb_pixelformat_for_depth( int depth )
           case 24:
                return DSPF_RGB24;
           case 32:
-               return DSPF_RGB32;
+               //(ToDo) hisilicon frame buffer support
+               //return DSPF_RGB32;
+               return DSPF_ARGB;
      }
 
      return DSPF_UNKNOWN;

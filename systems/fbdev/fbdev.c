@@ -746,11 +746,12 @@ system_shutdown( bool emergency )
                     "Could not restore variable screen information!\n" );
      }
 
-     if (shared->orig_cmap.len) {
-          if (ioctl( dfb_fbdev->fd, FBIOPUTCMAP, &shared->orig_cmap ) < 0)
-               D_DEBUG( "DirectFB/FBDev: "
-                        "Could not restore palette!\n" );
-     }
+// (ToDo) HiFB not support
+//     if (shared->orig_cmap.len) {
+//          if (ioctl( dfb_fbdev->fd, FBIOPUTCMAP, &shared->orig_cmap ) < 0)
+//               D_DEBUG( "DirectFB/FBDev: "
+//                        "Could not restore palette!\n" );
+//     }
 
      if (shared->orig_cmap_memory)
           SHFREE( shared->shmpool_data, shared->orig_cmap_memory );
@@ -1236,8 +1237,9 @@ primarySetColorAdjustment( CoreLayer          *layer,
 
      D_DEBUG_AT( FBDev_Primary, "%s()\n", __FUNCTION__ );
 
-     if (dfb_fbdev->shared->fix.visual != FB_VISUAL_DIRECTCOLOR)
-          return DFB_UNIMPLEMENTED;
+// (ToDo) HiFB not support
+//     if (dfb_fbdev->shared->fix.visual != FB_VISUAL_DIRECTCOLOR)
+//          return DFB_UNIMPLEMENTED;
 
      /* Use gamma ramp to set color attributes */
      for (i = 0; i < (int)cmap->len; i++) {
@@ -1329,11 +1331,12 @@ primarySetColorAdjustment( CoreLayer          *layer,
 
      temp->len = cmap->len;
      temp->start = cmap->start;
-     if (FBDEV_IOCTL( FBIOPUTCMAP, temp ) < 0) {
-          D_PERROR( "DirectFB/FBDev: Could not set the palette!\n" );
-
-          return errno2result(errno);
-     }
+// (ToDo) HiFB not support
+//     if (FBDEV_IOCTL( FBIOPUTCMAP, temp ) < 0) {
+//          D_PERROR( "DirectFB/FBDev: Could not set the palette!\n" );
+//
+//          return errno2result(errno);
+//     }
 
      return DFB_OK;
 }
@@ -1954,8 +1957,9 @@ dfb_fbdev_test_mode( const VideoMode             *mode,
           return DFB_LIMITEXCEEDED;
      }
 
-     /* Enable test mode */
-     var.activate = FB_ACTIVATE_TEST;
+// (ToDo) HiFB not support
+//     /* Enable test mode */
+//     var.activate = FB_ACTIVATE_TEST;
 
 
      dfb_gfxcard_lock( GDLF_WAIT | GDLF_SYNC | GDLF_RESET | GDLF_INVALIDATE );
@@ -2328,12 +2332,13 @@ dfb_fbdev_set_gamma_ramp( DFBSurfacePixelFormat format )
                cmap->blue[i] |= cmap->blue[i] << 8;
      }
 
-     if (FBDEV_IOCTL( FBIOPUTCMAP, cmap ) < 0) {
-          D_PERROR( "DirectFB/FBDev: "
-                     "Could not set gamma ramp" );
-
-          return errno2result(errno);
-     }
+// (ToDo) HiFB not support
+//     if (FBDEV_IOCTL( FBIOPUTCMAP, cmap ) < 0) {
+//          D_PERROR( "DirectFB/FBDev: "
+//                     "Could not set gamma ramp" );
+//
+//          return errno2result(errno);
+//     }
 
      return DFB_OK;
 }
@@ -2360,11 +2365,12 @@ dfb_fbdev_set_palette( CorePalette *palette )
           cmap->transp[i] |= cmap->transp[i] << 8;
      }
 
-     if (FBDEV_IOCTL( FBIOPUTCMAP, cmap ) < 0) {
-          D_PERROR( "DirectFB/FBDev: Could not set the palette!\n" );
-
-          return errno2result(errno);
-     }
+// (ToDo) HiFB not support
+//     if (FBDEV_IOCTL( FBIOPUTCMAP, cmap ) < 0) {
+//          D_PERROR( "DirectFB/FBDev: Could not set the palette!\n" );
+//
+//          return errno2result(errno);
+//     }
 
      return DFB_OK;
 }
@@ -2421,12 +2427,13 @@ dfb_fbdev_set_rgb332_palette( void )
           }
      }
 
-     if (FBDEV_IOCTL( FBIOPUTCMAP, &cmap ) < 0) {
-          D_PERROR( "DirectFB/FBDev: "
-                     "Could not set rgb332 palette" );
-          ret = errno2result(errno);
-          goto free_transp;
-     }
+// (ToDo) HiFB not support
+//     if (FBDEV_IOCTL( FBIOPUTCMAP, &cmap ) < 0) {
+//          D_PERROR( "DirectFB/FBDev: "
+//                     "Could not set rgb332 palette" );
+//          ret = errno2result(errno);
+//          goto free_transp;
+//     }
 
  free_transp:
      SHFREE( pool, cmap.transp );
